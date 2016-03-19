@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     var currentPlayer: UIColor!
     let rows = 7
     let columns = 7
+    var fields = Dictionary<UIView, FieldLocation>()
     
 
     override func viewDidLoad() {
@@ -41,27 +42,57 @@ class ViewController: UIViewController {
                                                      width))
                 field.backgroundColor = UIColor.blueColor()
                 self.view.addSubview(field)
-                let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("toggleField:"))
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTapField:"))
                 field.addGestureRecognizer(tapRecognizer)
+                
+                self.fields[field] = FieldLocation(row: y, column: x)
             }
         }
     }
 
     
-    func toggleField(recognizer:UITapGestureRecognizer) {
-        let field = recognizer.view
-        if (field?.backgroundColor != UIColor.blueColor()) {
-            return
-        }
+    func didTapField(recognizer:UITapGestureRecognizer) {
+        let location = self.getLocationForField(recognizer.view)!
         
-        field?.backgroundColor = self.currentPlayer
-        
-        if (self.currentPlayer == UIColor.redColor()) {
-            self.currentPlayer = UIColor.yellowColor()
-        } else {
-            self.currentPlayer = UIColor.redColor()
+        for var y = self.rows - 1; y >= 0; --y {
+            // find empty field in the tapped column
+            let field = self.getFieldAt(location.column, row: y)!
+            let isEmpty = field.backgroundColor == UIColor.blueColor()
+            if isEmpty {
+                // fill found field for current player
+                field.backgroundColor = self.currentPlayer
+                
+                // prepare for next player
+                if (self.currentPlayer == UIColor.redColor()) {
+                    self.currentPlayer = UIColor.yellowColor()
+                } else {
+                    self.currentPlayer = UIColor.redColor()
+                }
+                
+                return
+            }
         }
     }
 
+    
+    func getFieldAt(column:Int, row:Int) -> UIView? {
+        for entry in self.fields {
+            if entry.1.column == column && entry.1.row == row {
+                return entry.0
+            }
+        }
+        
+        return nil
+    }
+    
+    func getLocationForField(field: UIView?) -> FieldLocation? {
+        for entry in self.fields {
+            if entry.0 == field {
+                return entry.1
+            }
+        }
+        
+        return nil
+    }
 }
 
