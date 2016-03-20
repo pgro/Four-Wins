@@ -49,10 +49,11 @@ class ViewController: UIViewController {
     func layoutGameboard() {
         let margin: CGFloat = 10
         var width: CGFloat = 0
-        if (UIScreen.mainScreen().bounds.size.width < UIScreen.mainScreen().bounds.size.height) {
-            width = self.gameboardView.frame.size.width / CGFloat(self.rows)
+        let boardSize = self.gameboardView.frame.size
+        if (boardSize.width < boardSize.height) {
+            width = boardSize.width / CGFloat(self.rows)
         } else {
-            width = self.gameboardView.frame.size.height / CGFloat(self.columns)
+            width = boardSize.height / CGFloat(self.columns)
         }
         
         for (var x = 0; x < self.columns; ++x) {
