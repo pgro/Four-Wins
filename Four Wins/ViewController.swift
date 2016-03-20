@@ -9,6 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var gameboardView: UIView!
     var currentPlayer: UIColor!
     let rows = 7
     let columns = 7
@@ -27,21 +28,21 @@ class ViewController: UIViewController {
     
     func createGameboard() {
         var width: CGFloat = 0
-        if (self.view.frame.size.width < self.view.frame.size.height) {
-            width = self.view.frame.size.width / CGFloat(self.rows + 2)
+        if (UIScreen.mainScreen().bounds.size.width < UIScreen.mainScreen().bounds.size.height) {
+            width = self.gameboardView.frame.size.width / CGFloat(self.rows + 2)
         } else {
-            width = self.view.frame.size.height / CGFloat(self.columns + 2)
+            width = self.gameboardView.frame.size.height / CGFloat(self.columns + 2)
         }
+        let margin: CGFloat = 10
         
         for (var x = 0; x < self.columns; ++x) {
             for (var y = 0; y < self.rows; ++y) {
-                let margin: CGFloat = 10
                 let field = UIView(frame: CGRectMake(CGFloat(x) * (width + margin) + margin,
                                                      CGFloat(y) * (width + margin) + margin,
                                                      width,
                                                      width))
                 field.backgroundColor = UIColor.blueColor()
-                self.view.addSubview(field)
+                self.gameboardView.addSubview(field)
                 let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTapField:"))
                 field.addGestureRecognizer(tapRecognizer)
                 
