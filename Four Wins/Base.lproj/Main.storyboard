@@ -3,6 +3,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,21 +16,50 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVE-3X-VxT">
-                                <rect key="frame" x="10" y="30" width="580" height="560"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQ4-4o-tdW">
+                                <rect key="frame" x="10" y="10" width="355" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVE-3X-VxT">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="323.5"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJl-ws-cbu" userLabel="Info View">
+                                        <rect key="frame" x="0.0" y="323.5" width="355" height="323.5"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="TJl-ws-cbu" secondAttribute="height" multiplier="1:1" id="8LO-RZ-Wcc"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="8LO-RZ-Wcc"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="cVE-3X-VxT" firstAttribute="height" secondItem="bQ4-4o-tdW" secondAttribute="height" multiplier="0.5" id="2Ld-uK-QQ4"/>
+                                    <constraint firstItem="TJl-ws-cbu" firstAttribute="height" secondItem="cVE-3X-VxT" secondAttribute="height" id="M4A-Pc-swg"/>
+                                    <constraint firstAttribute="trailing" secondItem="TJl-ws-cbu" secondAttribute="trailing" id="TCh-DY-akY"/>
+                                    <constraint firstAttribute="trailing" secondItem="cVE-3X-VxT" secondAttribute="trailing" id="fAL-t7-czw"/>
+                                    <constraint firstItem="cVE-3X-VxT" firstAttribute="top" secondItem="bQ4-4o-tdW" secondAttribute="top" id="qUl-u0-dI5"/>
+                                    <constraint firstItem="TJl-ws-cbu" firstAttribute="leading" secondItem="bQ4-4o-tdW" secondAttribute="leading" id="uUL-jH-UaZ"/>
+                                    <constraint firstItem="cVE-3X-VxT" firstAttribute="leading" secondItem="bQ4-4o-tdW" secondAttribute="leading" id="vW7-dY-ClL"/>
+                                    <constraint firstAttribute="bottom" secondItem="TJl-ws-cbu" secondAttribute="bottom" id="zsk-66-wyH"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cVE-3X-VxT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="2Td-8T-eyT"/>
-                            <constraint firstItem="cVE-3X-VxT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="4d4-M7-n4Y"/>
-                            <constraint firstAttribute="trailing" secondItem="cVE-3X-VxT" secondAttribute="trailing" constant="10" id="Rce-sA-FdI"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cVE-3X-VxT" secondAttribute="bottom" constant="10" id="aUb-HM-uv7"/>
+                            <constraint firstItem="bQ4-4o-tdW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="hgA-Fi-bwB"/>
+                            <constraint firstItem="bQ4-4o-tdW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="vjD-T3-3Rc"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bQ4-4o-tdW" secondAttribute="bottom" constant="10" id="y4K-gS-Lu8"/>
+                            <constraint firstAttribute="trailing" secondItem="bQ4-4o-tdW" secondAttribute="trailing" constant="10" id="zcz-dS-Pzu"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="gameboardView" destination="cVE-3X-VxT" id="aHF-5f-j6K"/>
                     </connections>
