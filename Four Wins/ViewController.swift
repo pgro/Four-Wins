@@ -28,6 +28,7 @@ class ViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
+        self.view.layoutIfNeeded()
         self.layoutGameboard()
     }
     
