@@ -47,21 +47,23 @@ class ViewController: UIViewController {
     }
     
     func layoutGameboard() {
+        let margin: CGFloat = 10
         var width: CGFloat = 0
         if (UIScreen.mainScreen().bounds.size.width < UIScreen.mainScreen().bounds.size.height) {
-            width = self.gameboardView.frame.size.width / CGFloat(self.rows + 2)
+            width = self.gameboardView.frame.size.width / CGFloat(self.rows)
         } else {
-            width = self.gameboardView.frame.size.height / CGFloat(self.columns + 2)
+            width = self.gameboardView.frame.size.height / CGFloat(self.columns)
         }
-        let margin: CGFloat = 10
         
         for (var x = 0; x < self.columns; ++x) {
             for (var y = 0; y < self.rows; ++y) {
                 let field = self.getFieldAt(x, row: y)!
-                field.frame = CGRectMake(CGFloat(x) * (width + margin) + margin,
-                                         CGFloat(y) * (width + margin) + margin,
-                                         width,
-                                         width)
+                /* Fields need to be shifted by "margin / 2" so that 
+                 * they are centered in the gameboard */
+                field.frame = CGRectMake(CGFloat(x) * width + margin / 2,
+                                         CGFloat(y) * width + margin / 2,
+                                         width - margin,
+                                         width - margin)
             }
         }
     }
