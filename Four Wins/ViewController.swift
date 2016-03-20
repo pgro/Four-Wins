@@ -25,8 +25,28 @@ class ViewController: UIViewController {
         self.createGameboard()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        self.layoutGameboard()
+    }
     
+
     func createGameboard() {
+        for (var x = 0; x < self.columns; ++x) {
+            for (var y = 0; y < self.rows; ++y) {
+                let field = UIView()
+                field.backgroundColor = UIColor.blueColor()
+                self.gameboardView.addSubview(field)
+                let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTapField:"))
+                field.addGestureRecognizer(tapRecognizer)
+                
+                self.fields[field] = FieldLocation(row: y, column: x)
+            }
+        }
+    }
+    
+    func layoutGameboard() {
         var width: CGFloat = 0
         if (UIScreen.mainScreen().bounds.size.width < UIScreen.mainScreen().bounds.size.height) {
             width = self.gameboardView.frame.size.width / CGFloat(self.rows + 2)
@@ -37,16 +57,11 @@ class ViewController: UIViewController {
         
         for (var x = 0; x < self.columns; ++x) {
             for (var y = 0; y < self.rows; ++y) {
-                let field = UIView(frame: CGRectMake(CGFloat(x) * (width + margin) + margin,
-                                                     CGFloat(y) * (width + margin) + margin,
-                                                     width,
-                                                     width))
-                field.backgroundColor = UIColor.blueColor()
-                self.gameboardView.addSubview(field)
-                let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTapField:"))
-                field.addGestureRecognizer(tapRecognizer)
-                
-                self.fields[field] = FieldLocation(row: y, column: x)
+                let field = self.getFieldAt(x, row: y)!
+                field.frame = CGRectMake(CGFloat(x) * (width + margin) + margin,
+                                         CGFloat(y) * (width + margin) + margin,
+                                         width,
+                                         width)
             }
         }
     }
