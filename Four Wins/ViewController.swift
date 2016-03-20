@@ -50,22 +50,26 @@ class ViewController: UIViewController {
     func layoutGameboard() {
         let margin: CGFloat = 10
         var width: CGFloat = 0
+        var leftOver = CGPoint()
         let boardSize = self.gameboardView.frame.size
         if (boardSize.width < boardSize.height) {
             width = boardSize.width / CGFloat(self.rows)
+            leftOver.y = boardSize.height - boardSize.width
         } else {
             width = boardSize.height / CGFloat(self.columns)
+            leftOver.x = boardSize.width - boardSize.height
         }
         
         for (var x = 0; x < self.columns; ++x) {
             for (var y = 0; y < self.rows; ++y) {
                 let field = self.getFieldAt(x, row: y)!
-                /* Fields need to be shifted by "margin / 2" so that 
-                 * they are centered in the gameboard */
-                field.frame = CGRectMake(CGFloat(x) * width + margin / 2,
-                                         CGFloat(y) * width + margin / 2,
-                                         width - margin,
-                                         width - margin)
+                /* Fields need to be shifted so that they are centered in the gameboard:
+                 * * by "margin / 2" to respect the margin before the first and after the last field
+                 * * by "leftover" to respect the board's height/width difference */
+                field.frame.origin.x = CGFloat(x) * width + margin / 2 + leftOver.x / 2
+                field.frame.origin.y = CGFloat(y) * width + margin / 2 + leftOver.y / 2
+                field.frame.size.width  = width - margin
+                field.frame.size.height = width - margin
             }
         }
     }
