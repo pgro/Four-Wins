@@ -19,9 +19,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(hue: 0.1111, saturation: 0.25, brightness: 0.95, alpha: 1.0)
         self.currentPlayer = UIColor.redColor()
-        
+        self.gameboardView.backgroundColor = UIColor.clearColor()
         self.createGameboard()
     }
     

@@ -24,10 +24,11 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVE-3X-VxT">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="453"/>
+                                        <color key="backgroundColor" white="1" alpha="0.79789870689655173" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJl-ws-cbu" userLabel="Info View">
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <rect key="frame" x="0.0" y="453" width="355" height="194"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.81107219827586208" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="TJl-ws-cbu" secondAttribute="height" multiplier="1:1" id="8LO-RZ-Wcc"/>
                                         </constraints>
@@ -56,6 +57,7 @@
                                 </variation>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" red="0.99676626920700073" green="0.84832757711410522" blue="0.56313860416412354" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bQ4-4o-tdW" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="hgA-Fi-bwB"/>
                             <constraint firstItem="bQ4-4o-tdW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="vjD-T3-3Rc"/>
