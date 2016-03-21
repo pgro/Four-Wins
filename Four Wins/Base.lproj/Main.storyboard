@@ -43,12 +43,25 @@
                                                     <constraint firstAttribute="height" constant="50" id="Dvx-yp-Bcq"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oz6-iQ-sxN">
+                                                <rect key="frame" x="124.5" y="103" width="105" height="28"/>
+                                                <color key="backgroundColor" white="1" alpha="0.32359913793103451" colorSpace="calibratedWhite"/>
+                                                <inset key="contentEdgeInsets" minX="15" minY="5" maxX="15" maxY="5"/>
+                                                <state key="normal" title="New Game"/>
+                                                <connections>
+                                                    <action selector="startNewGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MVs-K0-L7a"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20051185344827585" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="oz6-iQ-sxN" firstAttribute="top" secondItem="nBY-JF-NnW" secondAttribute="bottom" constant="20" id="0t2-mc-gvN">
+                                                <variation key="heightClass=compact" constant="40"/>
+                                            </constraint>
                                             <constraint firstAttribute="width" secondItem="TJl-ws-cbu" secondAttribute="height" multiplier="1:1" id="8LO-RZ-Wcc"/>
                                             <constraint firstItem="laI-wz-rlX" firstAttribute="top" secondItem="TJl-ws-cbu" secondAttribute="top" constant="10" id="B4x-Q1-qjZ"/>
                                             <constraint firstItem="nBY-JF-NnW" firstAttribute="centerX" secondItem="TJl-ws-cbu" secondAttribute="centerX" id="BGU-nd-hv3"/>
+                                            <constraint firstItem="oz6-iQ-sxN" firstAttribute="centerX" secondItem="TJl-ws-cbu" secondAttribute="centerX" id="TY0-TJ-qpu"/>
                                             <constraint firstItem="nBY-JF-NnW" firstAttribute="top" secondItem="laI-wz-rlX" secondAttribute="bottom" constant="3.5" id="hhH-3b-6OJ"/>
                                             <constraint firstItem="laI-wz-rlX" firstAttribute="centerX" secondItem="TJl-ws-cbu" secondAttribute="centerX" id="la7-Uu-WS0"/>
                                         </constraints>

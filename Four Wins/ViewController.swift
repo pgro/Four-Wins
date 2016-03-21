@@ -174,5 +174,13 @@ class ViewController: UIViewController {
     func isMatching(column:Int, row:Int) -> Bool {
         return self.getFieldAt(column, row:row)?.backgroundColor == self.currentPlayer
     }
+    
+    
+    @IBAction func startNewGame(sender: AnyObject) {
+        for field in self.fields {
+            field.0.backgroundColor = UIColor.blueColor()
+        }
+        self.playerLabel.text = "Current Player:"
+    }
 }
 
