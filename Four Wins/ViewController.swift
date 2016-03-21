@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.currentPlayer = UIColor.redColor()
+        self.currentPlayer = Color.player1
         self.playerView.backgroundColor = self.currentPlayer
         
         self.gameboardView.backgroundColor = UIColor.clearColor()
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         for (var x = 0; x < self.columns; ++x) {
             for (var y = 0; y < self.rows; ++y) {
                 let field = UIView()
-                field.backgroundColor = UIColor.blueColor()
+                field.backgroundColor = Color.neutral
                 self.gameboardView.addSubview(field)
                 let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTapField:"))
                 field.addGestureRecognizer(tapRecognizer)
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         for var y = self.rows - 1; y >= 0; --y {
             // find empty field in the tapped column
             let field = self.getFieldAt(location.column, row: y)!
-            let isEmpty = field.backgroundColor == UIColor.blueColor()
+            let isEmpty = field.backgroundColor == Color.neutral
             if isEmpty {
                 // fill found field for current player
                 field.backgroundColor = self.currentPlayer
@@ -99,10 +99,10 @@ class ViewController: UIViewController {
                 }
                 
                 // prepare for next player
-                if (self.currentPlayer == UIColor.redColor()) {
-                    self.currentPlayer = UIColor.yellowColor()
+                if (self.currentPlayer == Color.player1) {
+                    self.currentPlayer = Color.player2
                 } else {
-                    self.currentPlayer = UIColor.redColor()
+                    self.currentPlayer = Color.player1
                 }
                 self.playerView.backgroundColor = self.currentPlayer
                 
@@ -178,7 +178,7 @@ class ViewController: UIViewController {
     
     @IBAction func startNewGame(sender: AnyObject) {
         for field in self.fields {
-            field.0.backgroundColor = UIColor.blueColor()
+            field.0.backgroundColor = Color.neutral
         }
         self.playerLabel.text = "Current Player:"
     }
