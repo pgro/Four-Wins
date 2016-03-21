@@ -10,7 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var gameboardView: UIView!
-    @IBOutlet weak var currentPlayerView: UIView!
+    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var playerLabel: UILabel!
     
     var currentPlayer: UIColor!
     let rows = 7
@@ -22,7 +23,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.currentPlayer = UIColor.redColor()
-        self.currentPlayerView.backgroundColor = self.currentPlayer
+        self.playerView.backgroundColor = self.currentPlayer
         
         self.gameboardView.backgroundColor = UIColor.clearColor()
         self.createGameboard()
@@ -35,6 +36,8 @@ class ViewController: UIViewController {
         self.layoutGameboard()
     }
     
+    
+    // MARK: gameboard
 
     func createGameboard() {
         for (var x = 0; x < self.columns; ++x) {
@@ -89,13 +92,19 @@ class ViewController: UIViewController {
                 // fill found field for current player
                 field.backgroundColor = self.currentPlayer
                 
+                if self.checkForGameEnd() {
+                    self.playerLabel.text = "Winner:"
+                    self.playerView.backgroundColor = self.currentPlayer
+                    return
+                }
+                
                 // prepare for next player
                 if (self.currentPlayer == UIColor.redColor()) {
                     self.currentPlayer = UIColor.yellowColor()
                 } else {
                     self.currentPlayer = UIColor.redColor()
                 }
-                self.currentPlayerView.backgroundColor = self.currentPlayer
+                self.playerView.backgroundColor = self.currentPlayer
                 
                 return
             }
@@ -121,6 +130,49 @@ class ViewController: UIViewController {
         }
         
         return nil
+    }
+    
+
+    
+    // MARK: game end check
+    
+    func checkForGameEnd() -> Bool {
+        /* This is a very naive check. Each field is checked in all
+         * necessary directions whether the respective three neighbors
+         * have the same color. */
+        for (var x = 0; x < self.columns; ++x) {
+            for (var y = 0; y < self.rows; ++y) {
+                var northEast = self.isMatching(x, row: y)
+                northEast = northEast && self.isMatching(x + 1, row: y - 1)
+                northEast = northEast && self.isMatching(x + 2, row: y - 2)
+                northEast = northEast && self.isMatching(x + 3, row: y - 3)
+                
+                var east = self.isMatching(x, row: y)
+                east = east && self.isMatching(x + 1, row: y)
+                east = east && self.isMatching(x + 2, row: y)
+                east = east && self.isMatching(x + 3, row: y)
+                
+                var southEast = self.isMatching(x, row: y)
+                southEast = southEast && self.isMatching(x + 1, row: y + 1)
+                southEast = southEast && self.isMatching(x + 2, row: y + 2)
+                southEast = southEast && self.isMatching(x + 3, row: y + 3)
+                
+                var south = self.isMatching(x, row: y)
+                south = south && self.isMatching(x, row: y + 1)
+                south = south && self.isMatching(x, row: y + 2)
+                south = south && self.isMatching(x, row: y + 3)
+                
+                if northEast || east || southEast || south {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    func isMatching(column:Int, row:Int) -> Bool {
+        return self.getFieldAt(column, row:row)?.backgroundColor == self.currentPlayer
     }
 }
 
