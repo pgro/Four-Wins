@@ -41,10 +41,20 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="cVE-3X-VxT" firstAttribute="height" secondItem="bQ4-4o-tdW" secondAttribute="height" multiplier="0.7" id="2Ld-uK-QQ4"/>
+                                    <constraint firstItem="TJl-ws-cbu" firstAttribute="top" secondItem="bQ4-4o-tdW" secondAttribute="top" constant="248" id="B4x-MW-1ZQ">
+                                        <variation key="heightClass=compact" constant="0.0"/>
+                                    </constraint>
+                                    <constraint firstAttribute="bottom" secondItem="cVE-3X-VxT" secondAttribute="bottom" constant="106.5" id="Eqo-zB-bhZ">
+                                        <variation key="heightClass=compact" constant="0.0"/>
+                                    </constraint>
+                                    <constraint firstItem="cVE-3X-VxT" firstAttribute="width" secondItem="bQ4-4o-tdW" secondAttribute="width" multiplier="2/3" id="FMG-Oa-IQu"/>
                                     <constraint firstItem="TJl-ws-cbu" firstAttribute="height" secondItem="cVE-3X-VxT" secondAttribute="height" multiplier="0.5" id="M4A-Pc-swg"/>
                                     <constraint firstAttribute="trailing" secondItem="TJl-ws-cbu" secondAttribute="trailing" id="TCh-DY-akY"/>
                                     <constraint firstAttribute="trailing" secondItem="cVE-3X-VxT" secondAttribute="trailing" id="fAL-t7-czw"/>
                                     <constraint firstItem="TJl-ws-cbu" firstAttribute="top" secondItem="cVE-3X-VxT" secondAttribute="bottom" id="nTV-Po-VTC"/>
+                                    <constraint firstItem="TJl-ws-cbu" firstAttribute="leading" secondItem="cVE-3X-VxT" secondAttribute="trailing" constant="-431.5" id="o6n-nf-kn4">
+                                        <variation key="heightClass=compact" constant="0.0"/>
+                                    </constraint>
                                     <constraint firstItem="cVE-3X-VxT" firstAttribute="top" secondItem="bQ4-4o-tdW" secondAttribute="top" id="qUl-u0-dI5"/>
                                     <constraint firstItem="TJl-ws-cbu" firstAttribute="leading" secondItem="bQ4-4o-tdW" secondAttribute="leading" id="uUL-jH-UaZ"/>
                                     <constraint firstItem="cVE-3X-VxT" firstAttribute="leading" secondItem="bQ4-4o-tdW" secondAttribute="leading" id="vW7-dY-ClL"/>
@@ -52,7 +62,23 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="Eqo-zB-bhZ"/>
+                                        <exclude reference="FMG-Oa-IQu"/>
+                                        <exclude reference="B4x-MW-1ZQ"/>
                                         <exclude reference="M4A-Pc-swg"/>
+                                        <exclude reference="o6n-nf-kn4"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="2Ld-uK-QQ4"/>
+                                        <include reference="Eqo-zB-bhZ"/>
+                                        <include reference="FMG-Oa-IQu"/>
+                                        <exclude reference="fAL-t7-czw"/>
+                                        <include reference="B4x-MW-1ZQ"/>
+                                        <exclude reference="nTV-Po-VTC"/>
+                                        <include reference="o6n-nf-kn4"/>
+                                        <exclude reference="uUL-jH-UaZ"/>
                                     </mask>
                                 </variation>
                             </view>
