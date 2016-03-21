@@ -23,11 +23,11 @@
                                 <rect key="frame" x="10" y="10" width="355" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVE-3X-VxT">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="323.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="453"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TJl-ws-cbu" userLabel="Info View">
-                                        <rect key="frame" x="0.0" y="323.5" width="355" height="323.5"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <rect key="frame" x="0.0" y="453" width="355" height="194"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="TJl-ws-cbu" secondAttribute="height" multiplier="1:1" id="8LO-RZ-Wcc"/>
                                         </constraints>
@@ -39,15 +39,21 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="cVE-3X-VxT" firstAttribute="height" secondItem="bQ4-4o-tdW" secondAttribute="height" multiplier="0.5" id="2Ld-uK-QQ4"/>
-                                    <constraint firstItem="TJl-ws-cbu" firstAttribute="height" secondItem="cVE-3X-VxT" secondAttribute="height" id="M4A-Pc-swg"/>
+                                    <constraint firstItem="cVE-3X-VxT" firstAttribute="height" secondItem="bQ4-4o-tdW" secondAttribute="height" multiplier="0.7" id="2Ld-uK-QQ4"/>
+                                    <constraint firstItem="TJl-ws-cbu" firstAttribute="height" secondItem="cVE-3X-VxT" secondAttribute="height" multiplier="0.5" id="M4A-Pc-swg"/>
                                     <constraint firstAttribute="trailing" secondItem="TJl-ws-cbu" secondAttribute="trailing" id="TCh-DY-akY"/>
                                     <constraint firstAttribute="trailing" secondItem="cVE-3X-VxT" secondAttribute="trailing" id="fAL-t7-czw"/>
+                                    <constraint firstItem="TJl-ws-cbu" firstAttribute="top" secondItem="cVE-3X-VxT" secondAttribute="bottom" id="nTV-Po-VTC"/>
                                     <constraint firstItem="cVE-3X-VxT" firstAttribute="top" secondItem="bQ4-4o-tdW" secondAttribute="top" id="qUl-u0-dI5"/>
                                     <constraint firstItem="TJl-ws-cbu" firstAttribute="leading" secondItem="bQ4-4o-tdW" secondAttribute="leading" id="uUL-jH-UaZ"/>
                                     <constraint firstItem="cVE-3X-VxT" firstAttribute="leading" secondItem="bQ4-4o-tdW" secondAttribute="leading" id="vW7-dY-ClL"/>
                                     <constraint firstAttribute="bottom" secondItem="TJl-ws-cbu" secondAttribute="bottom" id="zsk-66-wyH"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="M4A-Pc-swg"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <constraints>
