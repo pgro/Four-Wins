@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var gameboardView: UIView!
+    @IBOutlet weak var currentPlayerView: UIView!
+    
     var currentPlayer: UIColor!
     let rows = 7
     let columns = 7
@@ -20,6 +22,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.currentPlayer = UIColor.redColor()
+        self.currentPlayerView.backgroundColor = self.currentPlayer
+        
         self.gameboardView.backgroundColor = UIColor.clearColor()
         self.createGameboard()
     }
@@ -91,6 +95,7 @@ class ViewController: UIViewController {
                 } else {
                     self.currentPlayer = UIColor.redColor()
                 }
+                self.currentPlayerView.backgroundColor = self.currentPlayer
                 
                 return
             }
