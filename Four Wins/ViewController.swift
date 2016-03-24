@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     var currentPlayer: UIColor!
     let rows = 7
     let columns = 7
-    var fields = Dictionary<UIView, FieldLocation>()
+    var fields = Dictionary<FieldView, FieldLocation>()
     
 
     override func viewDidLoad() {
@@ -42,8 +42,8 @@ class ViewController: UIViewController {
     func createGameboard() {
         for x in 0...(self.columns - 1) {
             for y in 0...(self.rows - 1) {
-                let field = UIView()
-                field.backgroundColor = Color.neutral
+                let field = FieldView()
+                field.color = Color.neutral
                 self.gameboardView.addSubview(field)
                 let tapRecognizer = UITapGestureRecognizer(target: self,
                                                            action: #selector(ViewController.tryToFillField))
@@ -87,16 +87,14 @@ class ViewController: UIViewController {
     /** Tries to fill a field in the tapped column (as low as possible).
       * Switches to next player if successful. */
     func tryToFillField(recognizer:UITapGestureRecognizer) {
-        let location = self.getLocationForField(recognizer.view)!
+        let location = self.getLocationForField(recognizer.view as? FieldView)!
         
         var y = self.rows - 1
         while y >= 0 {
             // find empty field in the tapped column
-            let field = self.getFieldAt(location.column, row: y)!
-            let isEmpty = field.backgroundColor == Color.neutral
-            if isEmpty {
-                // fill found field for current player
-                field.backgroundColor = self.currentPlayer
+            let targetField = self.getFieldAt(location.column, row: y)!
+            if !targetField.isReserved {
+                self.insertFieldAnimatedly(targetField)
                 
                 if self.checkForGameEnd() {
                     self.playerLabel.text = "Winner:"
@@ -111,8 +109,32 @@ class ViewController: UIViewController {
         }
     }
 
+    func insertFieldAnimatedly(targetField: FieldView) {
+        // store the player who triggered the animation
+        let activePlayer = self.currentPlayer
+        targetField.reservedColor = activePlayer
+        
+        let location = self.getLocationForField(targetField)!
+        let topField = self.getFieldAt(location.column, row: 0)!
+        // insert a dummy view (with the target color) at the top...
+        let animatedField = FieldView(frame: topField.frame)
+        animatedField.color = activePlayer
+        self.gameboardView.addSubview(animatedField)
+        
+        // ...and animatedly move it to its final destination
+        UIView.animateWithDuration(1.5, animations: {
+            let destination = targetField.frame.origin.y - animatedField.frame.origin.y
+            animatedField.transform = CGAffineTransformTranslate(animatedField.transform,
+                0,
+                destination)
+            }, completion: { (completion) in
+                animatedField.removeFromSuperview()
+                targetField.color = activePlayer
+        })
+    }
     
-    func getFieldAt(column:Int, row:Int) -> UIView? {
+    
+    func getFieldAt(column:Int, row:Int) -> FieldView? {
         for entry in self.fields {
             if entry.1.column == column && entry.1.row == row {
                 return entry.0
@@ -122,7 +144,7 @@ class ViewController: UIViewController {
         return nil
     }
     
-    func getLocationForField(field: UIView?) -> FieldLocation? {
+    func getLocationForField(field: FieldView?) -> FieldLocation? {
         for entry in self.fields {
             if entry.0 == field {
                 return entry.1
@@ -172,13 +194,13 @@ class ViewController: UIViewController {
     }
     
     func isMatching(column:Int, row:Int) -> Bool {
-        return self.getFieldAt(column, row:row)?.backgroundColor == self.currentPlayer
+        return self.getFieldAt(column, row:row)?.reservedColor == self.currentPlayer
     }
     
     
     @IBAction func startNewGame(sender: AnyObject) {
         for field in self.fields {
-            field.0.backgroundColor = Color.neutral
+            field.0.color = Color.neutral
         }
         self.playerLabel.text = "Current Player:"
     }
