@@ -82,6 +82,8 @@ class ViewController: UIViewController {
     }
 
     
+    //MARK: field manipulation
+    
     /** Tries to fill a field in the tapped column (as low as possible).
       * Switches to next player if successful. */
     func tryToFillField(recognizer:UITapGestureRecognizer) {
@@ -132,7 +134,7 @@ class ViewController: UIViewController {
     
 
     
-    // MARK: game end check
+    // MARK: game mechanics/rules
     
     func checkForGameEnd() -> Bool {
         /* This is a very naive check. Each field is checked in all
