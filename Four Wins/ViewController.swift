@@ -40,12 +40,13 @@ class ViewController: UIViewController {
     // MARK: gameboard
 
     func createGameboard() {
-        for (var x = 0; x < self.columns; ++x) {
-            for (var y = 0; y < self.rows; ++y) {
+        for x in 0...(self.columns - 1) {
+            for y in 0...(self.rows - 1) {
                 let field = UIView()
                 field.backgroundColor = Color.neutral
                 self.gameboardView.addSubview(field)
-                let tapRecognizer = UITapGestureRecognizer(target: self, action: Selector("didTapField:"))
+                let tapRecognizer = UITapGestureRecognizer(target: self,
+                                                           action: #selector(ViewController.didTapField))
                 field.addGestureRecognizer(tapRecognizer)
                 
                 self.fields[field] = FieldLocation(row: y, column: x)
@@ -66,8 +67,8 @@ class ViewController: UIViewController {
             leftOver.x = boardSize.width - boardSize.height
         }
         
-        for (var x = 0; x < self.columns; ++x) {
-            for (var y = 0; y < self.rows; ++y) {
+        for x in 0...(self.columns - 1) {
+            for y in 0...(self.rows - 1) {
                 let field = self.getFieldAt(x, row: y)!
                 /* Fields need to be shifted so that they are centered in the gameboard:
                  * * by "margin / 2" to respect the margin before the first and after the last field
@@ -84,7 +85,8 @@ class ViewController: UIViewController {
     func didTapField(recognizer:UITapGestureRecognizer) {
         let location = self.getLocationForField(recognizer.view)!
         
-        for var y = self.rows - 1; y >= 0; --y {
+        var y = self.rows - 1
+        while y >= 0 {
             // find empty field in the tapped column
             let field = self.getFieldAt(location.column, row: y)!
             let isEmpty = field.backgroundColor == Color.neutral
@@ -108,6 +110,7 @@ class ViewController: UIViewController {
                 
                 return
             }
+            y -= 1
         }
     }
 
@@ -140,8 +143,8 @@ class ViewController: UIViewController {
         /* This is a very naive check. Each field is checked in all
          * necessary directions whether the respective three neighbors
          * have the same color. */
-        for (var x = 0; x < self.columns; ++x) {
-            for (var y = 0; y < self.rows; ++y) {
+        for x in 0...(self.columns - 1) {
+            for y in 0...(self.rows - 1) {
                 var northEast = self.isMatching(x, row: y)
                 northEast = northEast && self.isMatching(x + 1, row: y - 1)
                 northEast = northEast && self.isMatching(x + 2, row: y - 2)
