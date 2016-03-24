@@ -102,14 +102,7 @@ class ViewController: UIViewController {
                     return
                 }
                 
-                // prepare for next player
-                if (self.currentPlayer == Color.player1) {
-                    self.currentPlayer = Color.player2
-                } else {
-                    self.currentPlayer = Color.player1
-                }
-                self.playerView.backgroundColor = self.currentPlayer
-                
+                self.toggleActivePlayer()
                 return
             }
             y -= 1
@@ -186,6 +179,15 @@ class ViewController: UIViewController {
             field.0.backgroundColor = Color.neutral
         }
         self.playerLabel.text = "Current Player:"
+    }
+    
+    func toggleActivePlayer() {
+        if (self.currentPlayer == Color.player1) {
+            self.currentPlayer = Color.player2
+        } else {
+            self.currentPlayer = Color.player1
+        }
+        self.playerView.backgroundColor = self.currentPlayer
     }
 }
 
