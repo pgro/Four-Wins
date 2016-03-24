@@ -1,5 +1,6 @@
 # Four-Wins
-**Four Wins** is an iOS adoption of the famous game "connect four" - written in Swift. After coding for some time in ObjectiveC, I finally wanted to try out Apple's new language.
+**Four Wins** is an iOS adoption of the famous game "connect four" - written in Swift. After coding for some time in ObjectiveC, I finally wanted to try out Apple's new language.<br/>
+In case you wonder: The name is a literal translation from the game's German name.
 
 ## License
 MIT License
