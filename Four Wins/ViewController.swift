@@ -92,24 +92,9 @@ class ViewController: UIViewController {
         var y = self.rows - 1
         while y >= 0 {
             // find empty field in the tapped column
-            let field = self.getFieldAt(location.column, row: y)!
-            if !field.isReserved {
-                // fill found field for current player
-                field.reservedColor = self.currentPlayer
-                let topField = self.getFieldAt(location.column, row: 0)!
-                let animatedField = FieldView(frame: topField.frame)
-                animatedField.color = self.currentPlayer
-                self.gameboardView.addSubview(animatedField)
-                let activePlayer = self.currentPlayer
-                UIView.animateWithDuration(1.5, animations: {
-                    let destination = field.frame.origin.y - animatedField.frame.origin.y
-                    animatedField.transform = CGAffineTransformTranslate(animatedField.transform,
-                                                                        0,
-                                                                        destination)
-                    }, completion: { (completion) in
-                        animatedField.removeFromSuperview()
-                        field.color = activePlayer
-                })
+            let targetField = self.getFieldAt(location.column, row: y)!
+            if !targetField.isReserved {
+                self.insertFieldAnimatedly(targetField)
                 
                 if self.checkForGameEnd() {
                     self.playerLabel.text = "Winner:"
@@ -124,6 +109,30 @@ class ViewController: UIViewController {
         }
     }
 
+    func insertFieldAnimatedly(targetField: FieldView) {
+        // store the player who triggered the animation
+        let activePlayer = self.currentPlayer
+        targetField.reservedColor = activePlayer
+        
+        let location = self.getLocationForField(targetField)!
+        let topField = self.getFieldAt(location.column, row: 0)!
+        // insert a dummy view (with the target color) at the top...
+        let animatedField = FieldView(frame: topField.frame)
+        animatedField.color = activePlayer
+        self.gameboardView.addSubview(animatedField)
+        
+        // ...and animatedly move it to its final destination
+        UIView.animateWithDuration(1.5, animations: {
+            let destination = targetField.frame.origin.y - animatedField.frame.origin.y
+            animatedField.transform = CGAffineTransformTranslate(animatedField.transform,
+                0,
+                destination)
+            }, completion: { (completion) in
+                animatedField.removeFromSuperview()
+                targetField.color = activePlayer
+        })
+    }
+    
     
     func getFieldAt(column:Int, row:Int) -> FieldView? {
         for entry in self.fields {
