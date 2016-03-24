@@ -46,7 +46,7 @@ class ViewController: UIViewController {
                 field.backgroundColor = Color.neutral
                 self.gameboardView.addSubview(field)
                 let tapRecognizer = UITapGestureRecognizer(target: self,
-                                                           action: #selector(ViewController.didTapField))
+                                                           action: #selector(ViewController.tryToFillField))
                 field.addGestureRecognizer(tapRecognizer)
                 
                 self.fields[field] = FieldLocation(row: y, column: x)
@@ -82,7 +82,9 @@ class ViewController: UIViewController {
     }
 
     
-    func didTapField(recognizer:UITapGestureRecognizer) {
+    /** Tries to fill a field in the tapped column (as low as possible).
+      * Switches to next player if successful. */
+    func tryToFillField(recognizer:UITapGestureRecognizer) {
         let location = self.getLocationForField(recognizer.view)!
         
         var y = self.rows - 1
