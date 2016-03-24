@@ -96,7 +96,20 @@ class ViewController: UIViewController {
             let isEmpty = field.backgroundColor == Color.neutral
             if isEmpty {
                 // fill found field for current player
-                field.backgroundColor = self.currentPlayer
+                let topField = self.getFieldAt(location.column, row: 0)!
+                let animatedField = UIView(frame: topField.frame)
+                animatedField.backgroundColor = self.currentPlayer
+                self.gameboardView.addSubview(animatedField)
+                let activePlayer = self.currentPlayer
+                UIView.animateWithDuration(1.5, animations: {
+                    let destination = field.frame.origin.y - animatedField.frame.origin.y
+                    animatedField.transform = CGAffineTransformTranslate(animatedField.transform,
+                                                                        0,
+                                                                        destination)
+                    }, completion: { (completion) in
+                        animatedField.removeFromSuperview()
+                        field.backgroundColor = activePlayer
+                })
                 
                 if self.checkForGameEnd() {
                     self.playerLabel.text = "Winner:"
